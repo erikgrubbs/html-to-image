@@ -2,10 +2,11 @@
   "name": "html-to-image",
   "description": "Generates an image from a DOM node using HTML5 canvas and SVG.",
   "version": "1.11.13-internal-fork",
-  "main": "src/index.ts",
-  "module": "src/index.ts",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
   "files": [
-    "src"
+    "dist"
   ],
   "license": "MIT",
   "author": {
