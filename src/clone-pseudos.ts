@@ -9,7 +9,7 @@ function formatCSSText(style: CSSStyleDeclaration) {
 }
 
 function formatCSSProperties(style: CSSStyleDeclaration, options: Options) {
-  return getStyleProperties(options)
+  return getStyleProperties(style, options)
     .map((name) => {
       const value = style.getPropertyValue(name)
       const priority = style.getPropertyPriority(name)

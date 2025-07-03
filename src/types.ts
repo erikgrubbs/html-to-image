@@ -101,4 +101,9 @@ export interface Options {
    * An event handler for the error event when any image in html has problem with loading.
    */
   onImageErrorHandler?: OnErrorEventHandler
+  /**
+   * Filter custom CSS properties ('--*') from the computed styles. This can improve performance
+   * when dealing with large stylesheets that contain many custom properties.
+   */
+  filterCustomCSSProperties?: boolean
 }
