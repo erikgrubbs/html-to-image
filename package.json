@@ -4,7 +4,6 @@
   "version": "1.11.13-internal-fork",
   "main": "src/index.js",
   "module": "src/index.js",
-  "types": "src/types.ts",
   "files": [
     "src"
   ],
