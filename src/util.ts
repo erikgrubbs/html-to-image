@@ -66,10 +66,7 @@ export function toArray<T>(arrayLike: any): T[] {
 }
 
 let styleProps: string[] | null = null
-export function getStyleProperties(
-  sourceStyle: CSSStyleDeclaration,
-  options: Options = {},
-): string[] {
+export function getStyleProperties(options: Options = {}): string[] {
   if (styleProps) {
     return styleProps
   }
@@ -80,14 +77,13 @@ export function getStyleProperties(
   }
 
   if (options.filterCustomCSSProperties) {
-    styleProps = toArray(
-      Object.keys(sourceStyle).filter(
-        (name) => !name.startsWith('--') && name !== 'length',
-      ),
-    )
+    styleProps = toArray<string>(
+      window.getComputedStyle(document.documentElement),
+    ).filter((name) => !name.startsWith('--') && name !== 'length')
+
     return styleProps
   }
-  styleProps = toArray(sourceStyle)
+  styleProps = toArray(window.getComputedStyle(document.documentElement))
 
   return styleProps
 }
