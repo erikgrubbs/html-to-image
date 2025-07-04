@@ -1,11 +1,6 @@
 import type { Options } from './types'
 import { clonePseudoElements } from './clone-pseudos'
-import {
-  createImage,
-  toArray,
-  isInstanceOfElement,
-  getStyleProperties,
-} from './util'
+import { createImage, toArray, isInstanceOfElement } from './util'
 import { getMimeType } from './mimes'
 import { resourceToDataURL } from './dataurl'
 
@@ -134,8 +129,18 @@ function cloneCSSStyle<T extends HTMLElement>(
     targetStyle.cssText = sourceStyle.cssText
     targetStyle.transformOrigin = sourceStyle.transformOrigin
   } else {
-    getStyleProperties(options).forEach((name) => {
-      let value = sourceStyle.getPropertyValue(name)
+    const styleEntries = Array.from(sourceStyle)
+
+    const filteredEntries = options.filterCustomCSSProperties
+      ? styleEntries.filter((prop) => !prop.startsWith('--'))
+      : styleEntries
+
+    const styleNameValueTuple = filteredEntries.map((prop) => [
+      prop,
+      sourceStyle.getPropertyValue(prop),
+    ])
+
+    styleNameValueTuple.forEach(([name, value]) => {
       if (name === 'font-size' && value.endsWith('px')) {
         const reducedFont =
           Math.floor(parseFloat(value.substring(0, value.length - 2))) - 0.1

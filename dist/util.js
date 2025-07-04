@@ -102,10 +102,6 @@ function getStyleProperties(options) {
         styleProps = options.includeStyleProperties;
         return styleProps;
     }
-    if (options.filterCustomCSSProperties) {
-        styleProps = toArray(Object.keys(window.getComputedStyle(document.documentElement)).filter(function (name) { return !name.startsWith('--') && name !== 'length'; }));
-        return styleProps;
-    }
     styleProps = toArray(window.getComputedStyle(document.documentElement));
     return styleProps;
 }
