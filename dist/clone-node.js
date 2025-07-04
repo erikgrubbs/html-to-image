@@ -172,16 +172,8 @@ function cloneCSSStyle(nativeNode, clonedNode, options) {
         targetStyle.transformOrigin = sourceStyle.transformOrigin;
     }
     else {
-        var styleEntries = Array.from(sourceStyle);
-        var filteredEntries = options.filterCustomCSSProperties
-            ? styleEntries.filter(function (prop) { return !prop.startsWith('--'); })
-            : styleEntries;
-        var styleNameValueTuple = filteredEntries.map(function (prop) { return [
-            prop,
-            sourceStyle.getPropertyValue(prop),
-        ]; });
-        styleNameValueTuple.forEach(function (_a) {
-            var name = _a[0], value = _a[1];
+        (0, util_1.getStyleProperties)(options).forEach(function (name) {
+            var value = sourceStyle.getPropertyValue(name);
             if (name === 'font-size' && value.endsWith('px')) {
                 var reducedFont = Math.floor(parseFloat(value.substring(0, value.length - 2))) - 0.1;
                 value = "".concat(reducedFont, "px");

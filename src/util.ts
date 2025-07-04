@@ -76,6 +76,14 @@ export function getStyleProperties(options: Options = {}): string[] {
     return styleProps
   }
 
+  if (options.filterCustomCSSProperties) {
+    styleProps = toArray(
+      Object.keys(window.getComputedStyle(document.documentElement)).filter(
+        (name) => !name.startsWith('--') && name !== 'length',
+      ),
+    )
+    return styleProps
+  }
   styleProps = toArray(window.getComputedStyle(document.documentElement))
 
   return styleProps
