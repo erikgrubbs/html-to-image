@@ -2,5 +2,16 @@
  "extends": "@bubkoo/tsconfig",
   "include": [
     "src/**/*.ts"
-  ]
+  ],
+  "compilerOptions": {
+    "outDir": "dist",
+    "declaration": true,
+    "declarationDir": "dist",
+    "sourceMap": true,
+    "removeComments": true,
+    "noImplicitAny": false,
+    "strictNullChecks": false,
+    "esModuleInterop": true,
+    "skipLibCheck": true
+  }
 }
